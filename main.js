@@ -1,50 +1,20 @@
-import bootstrap from "./assets/img/bootstrap.svg";
-import css from "./assets/img/css-3.svg";
-import html from "./assets/img/html-5.svg";
-import javascript from "./assets/img/javascript.svg";
-import typescript from "./assets/img/typescript.svg";
-import mongo from "./assets/img/mongodb.svg";
-import nextjs from "./assets/img/nextjs-icon.svg";
-import nodejs from "./assets/img/nodejs-icon.svg";
-import react from "./assets/img/react.svg";
-import redux from "./assets/img/redux.svg";
-import sass from "./assets/img/sass.svg";
-import tailwind from "./assets/img/tailwindcss.svg";
-import vite from "./assets/img/vitejs.svg";
-import figma from "./assets/img/figma.svg";
-import express from "./assets/img/express.svg";
-
 const pieces = [
-  bootstrap,
-  bootstrap,
-  css,
-  css,
-  html,
-  html,
-  javascript,
-  javascript,
-  //   typescript,
-  //   typescript,
-  mongo,
-  mongo,
-  express,
-  express,
-  //   nextjs,
-  //   nextjs,
-  nodejs,
-  nodejs,
-  react,
-  react,
-  //   redux,
-  //   redux,
-  //   sass,
-  //   sass,
-  //tailwind,
-  // tailwind,
-  //vite,
-  //vite,
-  //   figma,
-  //   figma,
+  "./assets/img/bootstrap.svg",
+  "./assets/img/bootstrap.svg",
+  "./assets/img/css-3.svg",
+  "./assets/img/css-3.svg",
+  "./assets/img/html-5.svg",
+  "./assets/img/html-5.svg",
+  "./assets/img/javascript.svg",
+  "./assets/img/javascript.svg",
+  "./assets/img/mongodb.svg",
+  "./assets/img/mongodb.svg",
+  "./assets/img/express.svg",
+  "./assets/img/express.svg",
+  "./assets/img/nextjs-icon.svg",
+  "./assets/img/nextjs-icon.svg",
+  "./assets/img/react.svg",
+  "./assets/img/react.svg",
 ];
 
 // Using underscore.org shuffle method
@@ -132,7 +102,7 @@ const createSet = (pieces) => {
 // Set the Timer
 let s = 60;
 
-const setTimer = () => {
+const setTimer = (minutos) => {
   s--;
   if (s < 10) {
     console.log(`0${s}`);
