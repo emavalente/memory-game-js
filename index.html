@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/javascript.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+    <title>MeMoRy game of MERN Stack</title>
+  </head>
+  <body>
+    <div class="app-container">
+      <h1>MEMO GAME<span>MERN STACK LOGOS</span></h1>
+      <div class="controls">
+        <button id="new-game">New Game</button>
+      </div>
+      <p>TIME REST</p>
+      <div class="clock">
+        <span id="minutes">00</span>
+        <span>:</span>
+        <span id="seconds">00</span>
+      </div>
+      <div id="table" class="table"></div>
+      <p>TOTAL SCORE:<span id="score">0</span></p>
+    </div>
+
+    <script type="module" src="./assets/js/underscore-min.js"></script>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

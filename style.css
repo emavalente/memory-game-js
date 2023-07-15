@@ -1,0 +1,174 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  background: linear-gradient(
+    to right top,
+    #d16ba5,
+    #c777b9,
+    #ba83ca,
+    #aa8fd8,
+    #9a9ae1,
+    #8aa7ec,
+    #79b3f4,
+    #69bff8,
+    #52cffe,
+    #41dfff,
+    #46eefa,
+    #5ffbf1
+  );
+}
+
+h1,
+span {
+  display: block;
+  font-weight: 900;
+  color: rgb(255, 255, 255);
+  text-align: center;
+}
+
+.app-container {
+  width: 100%;
+  max-width: 1440px;
+  min-height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  margin: 0 10px;
+  padding: 15px 24px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 700;
+  letter-spacing: 0.1rem;
+  background-color: #41dfff;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  color: #fff;
+  background-color: #d16ba5;
+  transition: background-color 0.3s ease;
+}
+
+.controls {
+  width: 100%;
+  max-width: 440px;
+  margin: 32px 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+p,
+.clock {
+  font-weight: 900;
+  text-align: center;
+}
+
+p span,
+.clock span {
+  font-size: 2rem;
+}
+
+.clock span {
+  display: inline-block;
+}
+
+.table {
+  width: 100%;
+  max-width: 400px;
+  min-height: 340px;
+  margin: 24px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.sticker {
+  width: 64px;
+  height: 64px;
+}
+
+.piece {
+  padding: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-radius: 4px;
+  background-color: #fff;
+  box-shadow: 0 0 10px #70aab4, 2px 4px 8px #365358;
+  cursor: pointer;
+  transform: rotateY(180deg);
+  transition: 0.25s;
+}
+
+.piece::after {
+  content: "";
+  position: absolute;
+  border-radius: 4px;
+  inset: 0;
+  background-color: #d16ba5;
+  outline: 1px solid #ba83ca;
+  outline-offset: -8px;
+  transform: rotateY(0deg);
+  backface-visibility: hidden;
+  transition: 0.25s;
+}
+
+.piece-show::after,
+.piece-match::after {
+  transform: rotateY(180deg);
+}
+
+.piece.piece-show {
+  transform: rotateY(0deg);
+}
+
+.piece-match {
+  animation: jump 0.5s;
+  transform: rotateY(0deg);
+}
+
+@keyframes jump {
+  from {
+    transform: rotate(0deg);
+  }
+  4% {
+    transform: rotate(5deg);
+  }
+  12.5% {
+    transform: rotate(-5deg);
+  }
+  21% {
+    transform: rotate(5deg);
+  }
+  29% {
+    transform: rotate(-5deg);
+  }
+  37.5% {
+    transform: rotate(5deg);
+  }
+  46% {
+    transform: rotate(-5deg);
+  }
+  50%,
+  to {
+    transform: rotate(0deg);
+  }
+}
