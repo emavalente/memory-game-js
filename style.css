@@ -56,10 +56,13 @@ button {
   transition: background-color 0.3s ease;
 }
 
-button:hover {
+button:hover:enabled {
   color: #fff;
-  background-color: #d16ba5;
-  transition: background-color 0.3s ease;
+  background-color: #20c9eb;
+}
+
+button:disabled {
+  cursor: default;
 }
 
 .controls {

@@ -27,7 +27,7 @@ const pieces = [
   "./assets/img/react.svg",
 ];
 let score = 0;
-
+let gameInitiated = false;
 // Using underscore.org shuffle method
 let mixedPieces = [];
 
@@ -85,13 +85,14 @@ const createSet = (pieces) => {
 
     pieceContainer.appendChild(image);
     table.appendChild(pieceContainer);
-
-    pieceContainer.addEventListener("click", () => {
-      pieceContainer.classList.add("piece-show");
-      setTimeout(() => {
-        isMatch();
-      }, 500);
-    });
+    if (gameInitiated === true) {
+      pieceContainer.addEventListener("click", () => {
+        pieceContainer.classList.add("piece-show");
+        setTimeout(() => {
+          isMatch();
+        }, 300);
+      });
+    }
   });
 };
 
@@ -111,7 +112,8 @@ const startCountdown = (elementMin, elementSec, min, sec = 60) => {
     elementSec.textContent = `0${sec}`;
     if (sec == 0) {
       if (sec === 0 && min === 0) {
-        alert("Time is over...");
+        alert("Time is over...You Lose!");
+        newBtn.setAttribute("disabled", false);
         return;
       }
       min--;
@@ -128,9 +130,11 @@ const startCountdown = (elementMin, elementSec, min, sec = 60) => {
 
 // Create a New Game
 const newGame = () => {
+  gameInitiated = true;
   table.innerHTML = ""; // Clean the DOM repetition of pieces
   createSet(pieces);
   startCountdown(minutes, seconds, 1);
+  newBtn.setAttribute("disabled", "");
 };
 
 // Inicial table of pieces
