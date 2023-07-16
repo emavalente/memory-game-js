@@ -55,6 +55,7 @@ const isMatch = () => {
       ) {
         setTimeout(() => {
           alert(`Felicidades!! Ganaste! Tu puntaje fue: ${score}`);
+          newBtn.removeAttribute("disabled", "");
         }, 200);
       }
       return;
