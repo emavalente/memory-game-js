@@ -5,7 +5,7 @@ const screenScore = document.querySelector("#score");
 const seconds = document.querySelector("#seconds");
 const minutes = document.querySelector("#minutes");
 
-// DOM Events
+// DOM EventListeners
 newBtn.addEventListener("click", () => newGame());
 
 const pieces = [
@@ -26,8 +26,9 @@ const pieces = [
   "./assets/img/react.svg",
   "./assets/img/react.svg",
 ];
-let score = 0;
-let gameInitiated = false;
+let score = 0; // score counter
+let gameInitiated = false; // state flag
+
 // Using underscore.org shuffle method
 let mixedPieces = [];
 
@@ -113,7 +114,8 @@ const startCountdown = (elementMin, elementSec, min, sec = 60) => {
     if (sec == 0) {
       if (sec === 0 && min === 0) {
         alert("Time is over...You Lose!");
-        newBtn.setAttribute("disabled", false);
+        newBtn.removeAttribute("disabled", "");
+        gameInitiated = false;
         return;
       }
       min--;
