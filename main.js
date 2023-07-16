@@ -1,3 +1,13 @@
+// DOM Selectors
+const table = document.querySelector("#table");
+const newBtn = document.querySelector("#new-game");
+const screenScore = document.querySelector("#score");
+const seconds = document.querySelector("#seconds");
+const minutes = document.querySelector("#minutes");
+
+// DOM Events
+newBtn.addEventListener("click", () => newGame());
+
 const pieces = [
   "./assets/img/bootstrap.svg",
   "./assets/img/bootstrap.svg",
@@ -16,19 +26,10 @@ const pieces = [
   "./assets/img/react.svg",
   "./assets/img/react.svg",
 ];
+let score = 0;
 
 // Using underscore.org shuffle method
 let mixedPieces = [];
-
-// DOM Selectors
-const table = document.querySelector("#table");
-const newBtn = document.querySelector("#new-game");
-const screenScore = document.querySelector("#score");
-
-// DOM Events
-newBtn.addEventListener("click", () => newGame());
-
-let score = 0;
 
 // Match function
 const isMatch = () => {
@@ -45,12 +46,6 @@ const isMatch = () => {
       document
         .querySelectorAll(".piece-show")[0]
         .classList.remove("piece-show");
-      // document
-      //   .querySelectorAll(".piece-match")[1]
-      //   .removeEventListener("click", () => {});
-      // document
-      //   .querySelectorAll(".piece-match")[0]
-      //   .removeEventListener("click", () => {});
       score += 100;
       screenScore.innerText = score;
 
@@ -61,6 +56,7 @@ const isMatch = () => {
           alert(`Felicidades!! Ganaste! Tu puntaje fue: ${score}`);
         }, 200);
       }
+      return;
     } else {
       document
         .querySelectorAll(".piece-show")[1]
@@ -99,31 +95,43 @@ const createSet = (pieces) => {
   });
 };
 
-// Set the Timer
-let s = 60;
-
-const setTimer = (minutos) => {
-  s--;
-  if (s < 10) {
-    console.log(`0${s}`);
-    if (s == 0) {
-      alert("Se termino el conteo");
-      return;
+// Countdown Timer
+const startCountdown = (elementMin, elementSec, min, sec = 60) => {
+  if (document.querySelectorAll(".piece-match").length == mixedPieces.length) {
+    return;
+  }
+  if (min < 10) {
+    elementMin.textContent = `0${min}`;
+  } else {
+    elementMin.textContent = `${min}`;
+  }
+  sec--;
+  if (sec < 10) {
+    console.log(`${min}:0${sec}`);
+    elementSec.textContent = `0${sec}`;
+    if (sec == 0) {
+      if (sec === 0 && min === 0) {
+        alert("Time is over...");
+        return;
+      }
+      min--;
+      sec = 60;
     }
   } else {
-    console.log(s);
+    console.log(`${min}:${sec}`);
+    elementSec.textContent = `${sec}`;
   }
   setTimeout(() => {
-    setTimer();
+    startCountdown(elementMin, elementSec, min, sec);
   }, 1000);
 };
 
 // Create a New Game
 const newGame = () => {
-  table.innerHTML = "";
+  table.innerHTML = ""; // Clean the DOM repetition of pieces
   createSet(pieces);
-  setTimer(1);
+  startCountdown(minutes, seconds, 1);
 };
 
-// Start the Game
+// Inicial table of pieces
 window.onload = createSet(pieces);
