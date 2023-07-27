@@ -1,11 +1,12 @@
-// DOM Selectors
+// DOM Selectors.
+const appContainer = document.querySelector(".app-container");
 const table = document.querySelector("#table");
 const newBtn = document.querySelector("#new-game");
 const screenScore = document.querySelector("#score");
 const seconds = document.querySelector("#seconds");
 const minutes = document.querySelector("#minutes");
 
-// DOM EventListeners
+// DOM EventListeners.
 newBtn.addEventListener("click", () => newGame());
 
 const pieces = [
@@ -26,10 +27,10 @@ const pieces = [
   "./assets/img/react.svg",
   "./assets/img/react.svg",
 ];
-let score = 0; // score counter
-let gameInitiated = false; // state flag
+let score = 0; // score counter.
+let gameInitiated = false; // state flag.
 
-// Using underscore.org shuffle method
+// Using underscore.org shuffle method.
 let mixedPieces = [];
 
 // Match function
@@ -74,7 +75,7 @@ const isMatch = () => {
   }
 };
 
-// Shuffle and render pieces
+// Shuffle and render pieces.
 const createSet = (pieces) => {
   mixedPieces = _.shuffle(pieces);
   mixedPieces.forEach((piece) => {
@@ -98,47 +99,76 @@ const createSet = (pieces) => {
   });
 };
 
-// Countdown Timer
+// Countdown Timer.
 const startCountdown = (elementMin, elementSec, min, sec = 60) => {
+  // Pieces Validation to stop the Countdown.
   if (document.querySelectorAll(".piece-match").length == mixedPieces.length) {
     return;
   }
-  if (min < 10) {
-    elementMin.textContent = `0${min}`;
-  } else {
-    elementMin.textContent = `${min}`;
-  }
+
   sec--;
+
+  // Validation of seconds values to print seconds and discount minutes.
   if (sec < 10) {
-    console.log(`${min}:0${sec}`);
     elementSec.textContent = `0${sec}`;
     if (sec == 0) {
-      if (sec === 0 && min === 0) {
-        alert("Time is over...You Lose!");
+      if (sec === 0 && min === 0 && elementSec.textContent == "00") {
         newBtn.removeAttribute("disabled", "");
         gameInitiated = false;
+        alert("Time is over...You Lose!");
         return;
       }
       min--;
       sec = 60;
     }
   } else {
-    console.log(`${min}:${sec}`);
     elementSec.textContent = `${sec}`;
   }
+
+  // Validation of minutes values to print .
+  if (min < 10) {
+    elementMin.textContent = `0${min}`;
+  } else {
+    elementMin.textContent = `${min}`;
+  }
+
+  // Recursion of startCountdown.
   setTimeout(() => {
     startCountdown(elementMin, elementSec, min, sec);
   }, 1000);
 };
 
+const getReadyMessage = () => {
+  const getready = document.createElement("P");
+  getready.classList.add("get-ready", "goUp");
+  getready.textContent = "Get Ready";
+
+  const go = document.createElement("P");
+  go.classList.add("go", "beat");
+  go.textContent = "GO!";
+
+  appContainer.appendChild(getready);
+  setTimeout(() => {
+    getready.remove();
+    appContainer.appendChild(go);
+    setTimeout(() => {
+      go.remove();
+    }, 800);
+  }, 2900);
+};
+
 // Create a New Game
 const newGame = () => {
-  gameInitiated = true;
-  table.innerHTML = ""; // Clean the DOM repetition of pieces
-  createSet(pieces);
-  startCountdown(minutes, seconds, 1);
+  getReadyMessage();
+  setTimeout(() => {
+    gameInitiated = true;
+    table.innerHTML = ""; // Clean the DOM repetition of pieces.
+    createSet(pieces);
+    startCountdown(minutes, seconds, 1);
+  }, 4000);
+
   newBtn.setAttribute("disabled", "");
 };
 
-// Inicial table of pieces
+// Inicial table of pieces.
 window.onload = createSet(pieces);

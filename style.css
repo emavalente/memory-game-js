@@ -144,11 +144,11 @@ p span,
 }
 
 .piece-match {
-  animation: jump 0.5s;
+  animation: shake 0.5s;
   transform: rotateY(0deg);
 }
 
-@keyframes jump {
+@keyframes shake {
   from {
     transform: rotate(0deg);
   }
@@ -173,5 +173,66 @@ p span,
   50%,
   to {
     transform: rotate(0deg);
+  }
+}
+
+.get-ready,
+.go {
+  font-size: 4rem;
+  color: #fff;
+  text-shadow: 0 0 5px black;
+  position: absolute;
+  bottom: 0;
+}
+
+.get-ready.goUp {
+  animation: goUp 3s;
+}
+
+.go.beat {
+  bottom: 50%;
+  animation: beat;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes goUp {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+
+  20% {
+    transform: translateY(-400%);
+  }
+
+  35% {
+    transform: translateY(-300%);
+    opacity: 1;
+  }
+
+  45% {
+    transform: translateY(-350%);
+  }
+
+  70% {
+    transform: translateY(-350%);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes beat {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(5);
+    opacity: 0;
   }
 }
